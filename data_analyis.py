@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def load_data(file_path):
-    """Load data from a CSV file."""
+    """Load data from an Excel file."""
     try:
         data = pd.read_excel(file_path)
         return data
@@ -37,10 +37,19 @@ def analyze_data(data):
         plt.ylabel('Count')
         plt.show()
 
+        # List out missing values, if any
+        missing_values = data.isnull().sum()
+        if not missing_values.empty:
+            print("Missing Values:")
+            print(missing_values)
+        else:
+            print("No missing values.")
+
 def main():
-    file_path = input("Enter the path to the CSV file: ")
+    file_path = input("Enter the path to the Excel file: ")
     data = load_data(file_path)
     analyze_data(data)
 
 if __name__ == "__main__":
     main()
+
